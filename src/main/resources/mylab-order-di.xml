@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<bean id="product1" class="mylab.order.di.xml.Product" scope="singleton">
+		<property name="id" value="milk" />
+		<property name="name" value="우유" />
+		<property name="price" value="1000" />
+	</bean>
+	
+	<bean id="product2" class="mylab.order.di.xml.Product">
+		<constructor-arg index="0" value="egg"/>
+		<constructor-arg index="1" value="계란"/>
+		<constructor-arg index="2" value="2000" />
+	</bean>
+	
+	<bean id="shoppingCart" class="mylab.order.di.xml.ShoppingCart">
+		<property name="products">
+			<list>
+				<ref bean="product1" />
+				<ref bean="product2" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="orderService" class="mylab.order.di.xml.OrderService" >
+		<property name="shoppingCart" ref="shoppingCart"></property>
+	</bean>
+
+</beans>
